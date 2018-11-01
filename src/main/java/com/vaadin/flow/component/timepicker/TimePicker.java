@@ -44,25 +44,6 @@ public class TimePicker extends GeneratedVaadinTimePicker<TimePicker, LocalTime>
         return d == null ? "" : d.toString();
     };
 
-    /**
-     * Returns a stream of all the available locales that are supported by the
-     * time picker component.
-     * <p>
-     * This is a shorthand for {@link Locale#getAvailableLocales()} where all
-     * locales without the {@link Locale#getLanguage()} have been filtered out,
-     * as the browser cannot localize the time for those.
-     *
-     * @return a stream of the available locales that are supported by the time
-     *         picker component
-     * @see #setLocale(Locale)
-     * @see Locale#getAvailableLocales()
-     * @see Locale#getLanguage()
-     */
-    public static Stream<Locale> getSupportedAvailableLocales() {
-        return Stream.of(Locale.getAvailableLocales())
-                .filter(locale -> !locale.getLanguage().isEmpty());
-    }
-
     private Locale locale;
 
     /**
@@ -220,8 +201,6 @@ public class TimePicker extends GeneratedVaadinTimePicker<TimePicker, LocalTime>
      * <p>
      * If the step is less than 900 seconds, the dropdown is hidden.
      * </p>
-     * // TODO this API is bad for Java and should be replaced with Duration API
-     * instead
      *
      * @param step
      *            the step to set, unit seconds
@@ -238,8 +217,7 @@ public class TimePicker extends GeneratedVaadinTimePicker<TimePicker, LocalTime>
      * This property is not synchronized automatically from the client side, so
      * the returned value may not be the same as in client side.
      *
-     * @return the {@code step} property from the picker, unit seconds // TODO
-     *         kill with fire, see setter
+     * @return the {@code step} property from the picker, unit seconds
      */
     public double getStep() {
         return super.getStepDouble();
@@ -290,7 +268,8 @@ public class TimePicker extends GeneratedVaadinTimePicker<TimePicker, LocalTime>
     public void setLocale(Locale locale) {
         Objects.requireNonNull(locale, "Locale must not be null.");
         if (locale.getLanguage().isEmpty()) {
-            throw new UnsupportedOperationException("Given Locale " + locale.getDisplayName()
+            throw new UnsupportedOperationException("Given Locale "
+                    + locale.getDisplayName()
                     + " is not supported by time picker because it is missing the language information.");
         }
 
@@ -322,5 +301,24 @@ public class TimePicker extends GeneratedVaadinTimePicker<TimePicker, LocalTime>
     private void runBeforeClientResponse(SerializableConsumer<UI> command) {
         getElement().getNode().runWhenAttached(ui -> ui
                 .beforeClientResponse(this, context -> command.accept(ui)));
+    }
+
+    /**
+     * Returns a stream of all the available locales that are supported by the
+     * time picker component.
+     * <p>
+     * This is a shorthand for {@link Locale#getAvailableLocales()} where all
+     * locales without the {@link Locale#getLanguage()} have been filtered out,
+     * as the browser cannot localize the time for those.
+     *
+     * @return a stream of the available locales that are supported by the time
+     *         picker component
+     * @see #setLocale(Locale)
+     * @see Locale#getAvailableLocales()
+     * @see Locale#getLanguage()
+     */
+    public static Stream<Locale> getSupportedAvailableLocales() {
+        return Stream.of(Locale.getAvailableLocales())
+                .filter(locale -> !locale.getLanguage().isEmpty());
     }
 }
