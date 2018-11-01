@@ -239,6 +239,8 @@ public class TimePicker extends GeneratedVaadinTimePicker<TimePicker, LocalTime>
     }
 
     private void initConnector() {
+        // can't run this with getElement().executeJavaScript(...) since then
+        // setLocale might be called before this causing client side error
         runBeforeClientResponse(ui -> ui.getPage().executeJavaScript(
                 "window.Vaadin.Flow.timepickerConnector.initLazy($0)",
                 getElement()));
@@ -248,8 +250,9 @@ public class TimePicker extends GeneratedVaadinTimePicker<TimePicker, LocalTime>
      * Set the Locale for the Time Picker. The displayed time will be formatted
      * by the browser using the given locale.
      * <p>
-     * The default locale is fetched from the {@link UI#getLocale()} when the
-     * component is attached to an UI.
+     * By default, the locale is {@code null} until the component is attached to
+     * an UI, and then locale is set to {@link UI#getLocale()}, unless a locale
+     * has been explicitly set before that.
      * <p>
      * The time formatting is done in the browser using the <a href=
      * "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toLocaleTimeString">Date.toLocaleTimeString()</a>
@@ -289,7 +292,9 @@ public class TimePicker extends GeneratedVaadinTimePicker<TimePicker, LocalTime>
     /**
      * Gets the Locale for this date picker.
      * <p>
-     * By default, the locale is empty until the component is attached to an UI,
+     * By default, the locale is {@code null} until the component is attached to
+     * an UI, and then locale is set to {@link UI#getLocale()}, unless
+     * {@link #setLocale(Locale)} has been explicitly called before that.
      *
      * @return the locale used for this picker
      */

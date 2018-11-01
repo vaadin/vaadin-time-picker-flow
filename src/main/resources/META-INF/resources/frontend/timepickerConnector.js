@@ -9,30 +9,30 @@ window.Vaadin.Flow.timepickerConnector = {
 
         const getAmPmString = function (locale, testTime) {
             const testTimeString = testTime.toLocaleTimeString(locale);
-            // AM/PM string is anything from one letter in arabic to standard two letters,
+            // AM/PM string is anything from one letter in eastern arabic to standard two letters,
             // to having space in between, dots ...
             // cannot disqualify whitespace since some locales use a. m. / p. m.
             // TODO when more scripts support is added (than Arabic), need to exclude those numbers too
             const endWithAmPmRegex = /[^\d\u0660-\u0669]+$/g;
             let amPmString = testTimeString.match(endWithAmPmRegex);
-            if (amPmString) {
-                amPmString = amPmString[0].trim();
-            } else {
+            if (!amPmString) {
                 // eg. chinese (and some else too) starts with am/pm
                 amPmString = testTimeString.match(/^[^\d\u0660-\u0669]+/g);
-                amPmString ? amPmString[0].trim() : amPmString;
+            }
+            if (amPmString) {
+                amPmString = amPmString[0].trim();
             }
             return amPmString;
         };
         const testPmTime = new Date('August 19, 1975 23:15:30');
+        const testAmTime = new Date('August 19, 1975 05:15:30');
 
         const getPmString = function (locale) {
             return getAmPmString(locale, testPmTime);
-        };
 
+        };
         const getAmString = function (locale) {
-            const testTime = new Date('August 19, 1975 05:15:30');
-            return getAmPmString(locale, testTime);
+            return getAmPmString(locale, testAmTime);
         };
 
         // map from unicode arabic characters to numbers
@@ -79,7 +79,7 @@ window.Vaadin.Flow.timepickerConnector = {
 
             // 2. What is the separator ?
             let localeTimeString = testPmTime.toLocaleTimeString(locale);
-            // since the next regex picks first non-number-whitespace, need to discard possible am/pm from beginning (eg. chinese locale)
+            // since the next regex picks first non-number-whitespace, need to discard possible PM from beginning (eg. chinese locale)
             if (pmString && localeTimeString.startsWith(pmString)) {
                 localeTimeString = localeTimeString.replace(pmString, '');
             }
