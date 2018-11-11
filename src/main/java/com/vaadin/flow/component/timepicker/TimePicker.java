@@ -17,6 +17,7 @@ package com.vaadin.flow.component.timepicker;
 
 import java.time.Duration;
 import java.time.LocalTime;
+import java.time.temporal.ChronoField;
 import java.util.Locale;
 import java.util.Objects;
 import java.util.stream.Stream;
@@ -37,12 +38,13 @@ import com.vaadin.flow.shared.Registration;
 public class TimePicker extends GeneratedVaadinTimePicker<TimePicker, LocalTime>
         implements HasSize, HasValidation, HasEnabled {
 
-    private static final SerializableFunction<String, LocalTime> PARSER = s -> {
-        return s == null || s.isEmpty() ? null : LocalTime.parse(s);
+    private static final SerializableFunction<String, LocalTime> PARSER = valueFromClient -> {
+        return valueFromClient == null || valueFromClient.isEmpty() ? null
+                : LocalTime.parse(valueFromClient);
     };
 
-    private static final SerializableFunction<LocalTime, String> FORMATTER = d -> {
-        return d == null ? "" : d.toString();
+    private static final SerializableFunction<LocalTime, String> FORMATTER = valueFromModel -> {
+        return valueFromModel == null ? "" : valueFromModel.toString();
     };
 
     private Locale locale;
@@ -199,7 +201,10 @@ public class TimePicker extends GeneratedVaadinTimePicker<TimePicker, LocalTime>
      * <p>
      * <em>NOTE:</em> If the step is less than 900 seconds, the dropdown is
      * hidden.
-     * </p>
+     * <p>
+     * <em>NOTE: changing the step to a larger duration can cause a new
+     * {@link com.vaadin.flow.component.HasValue.ValueChangeEvent} to be fired
+     * if some parts (eg. seconds) is discarded from the value.</em>
      *
      * @param step
      *            the step to set, not {@code null} and should divide a day or
@@ -222,7 +227,7 @@ public class TimePicker extends GeneratedVaadinTimePicker<TimePicker, LocalTime>
      */
     public Duration getStep() {
         // the web component doesn't have a default value defined, but it is an
-        // hour, not 0.0 like generated
+        // hour, not 0.0 like in the generated class
         if (!getElement().hasProperty("step")) {
             return Duration.ofHours(1);
         }
@@ -269,7 +274,10 @@ public class TimePicker extends GeneratedVaadinTimePicker<TimePicker, LocalTime>
      * <p>
      * <em>NOTE: only the language + country/region codes are used</em>. This
      * means that the script and variant information is not used and supported.
-     * <em>NOTE: timezone related data is not supported.</em>
+     * <em>NOTE: timezone related data is not supported.</em> <em>NOTE: changing
+     * the locale does not cause a new
+     * {@link com.vaadin.flow.component.HasValue.ValueChangeEvent} to be
+     * fired.</em>
      *
      * @param locale
      *            the locale set to the time picker, cannot be [@code null}
