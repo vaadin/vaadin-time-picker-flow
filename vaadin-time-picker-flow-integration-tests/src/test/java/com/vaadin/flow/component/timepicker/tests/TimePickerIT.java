@@ -96,6 +96,18 @@ public class TimePickerIT extends ComponentDemoTest {
         picker.closeDropDown();
     }
 
+    @Test
+    public void TimePickerWithMinAndMaxSetting() {
+        TimePickerElement picker = $(TimePickerElement.class)
+                .id("time-picker-min-max");
+        picker.scrollIntoView();
+        picker.openDropDown();
+        Assert.assertEquals("The first item in the dropdown should be the min value",
+                "5:00 AM", picker.getItemText(0));
+        Assert.assertEquals("The last item in the dropdown should be the max value",
+                "6:00 PM", picker.getLastItemText());
+    }
+
     private void selectStep(String step) {
         ComboBoxElement comboBox = $(ComboBoxElement.class).id("step-picker");
         selectFromComboBox(comboBox, step);
