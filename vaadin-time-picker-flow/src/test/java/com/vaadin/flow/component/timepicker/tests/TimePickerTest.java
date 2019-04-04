@@ -43,6 +43,13 @@ public class TimePickerTest {
     }
 
     @Test
+    public void timePicker_nullValue() {
+        TimePicker timePicker = new TimePicker();
+        timePicker.setValue(null);
+        assertEquals(null, timePicker.getValue());
+    }
+    
+    @Test
     public void setInitialValue() {
         TimePicker picker = new TimePicker(LocalTime.of(9, 32));
         assertEquals(LocalTime.of(9, 32), picker.getValue());
