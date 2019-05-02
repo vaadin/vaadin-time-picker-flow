@@ -10,7 +10,7 @@
         <version>1.2-SNAPSHOT</version>
     </parent>
 
-    <artifactId>vaadin-time-picker-flow-testbench</artifactId>
+    <artifactId>vaadin-time-picker-testbench</artifactId>
     <packaging>jar</packaging>
 
     <name>Vaadin TimePicker Testbench API</name>
