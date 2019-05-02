@@ -176,7 +176,7 @@ public class TimePickerView extends DemoView {
         TimePicker timePicker = new TimePicker();
         timePicker.setValue(LocalTime.now());
 
-        // timePicker an icon which can be clicked to clear the value:
+        // Display an icon which can be clicked to clear the value:
         timePicker.setClearButtonVisible(true);
         // end-source-example
 
