@@ -66,6 +66,7 @@ public class TimePickerView extends DemoView {
         localesCB.setItemLabelGenerator(Locale::getDisplayName);
         localesCB.setWidth("300px");
         localesCB.setItems(availableLocales);
+        localesCB.setAllowCustomValue(false);
 
         TimePicker timePicker = new TimePicker();
 
