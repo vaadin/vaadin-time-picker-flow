@@ -446,6 +446,15 @@ public class TimePickerLocalizationIT extends AbstractComponentIT {
                 + TimePickerLocalizationView.getLocaleString(locale) + "]";
     }
 
+    /**
+     * Calls {@code getTimePickerTextFieldValue()} for {@code
+     * TimePickerElement} and replaces non-breaking space characters (char 160)
+     * with normal spaces (char 32) for easier comparison. Small number of
+     * locales (such as es-PA) seem to use those for their localized
+     * timestamps.
+     *
+     * @return space-normalized timestamp
+     */
     private String getTimePickerTextFieldValueWithNormalSpaces() {
         return getTimePickerElement().getTimePickerTextFieldValue().replace((char)160, (char)32);
     }
