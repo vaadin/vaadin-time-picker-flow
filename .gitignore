@@ -16,7 +16,7 @@ driver
 
 # IntelliJ IDEA files
 .idea/
-vaadin-time-picker-flow.iml
+*.iml
 
 # The following files are generated/updated by flow-maven-plugin
 package.json
