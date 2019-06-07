@@ -16,5 +16,5 @@ driver
 
 # IntelliJ IDEA files
 .idea/
-vaadin-time-picker-flow.iml
+*.iml
 
