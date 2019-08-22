@@ -60,7 +60,7 @@ public class TimePicker extends GeneratedVaadinTimePicker<TimePicker, LocalTime>
     private static final long MILLISECONDS_IN_AN_HOUR = 3600000L;
 
     private Locale locale;
-    private transient DateTimeFormatter formatter;
+    private transient DateTimeFormatter dateTimeFormatter;
 
     private LocalTime max;
     private LocalTime min;
@@ -364,7 +364,7 @@ public class TimePicker extends GeneratedVaadinTimePicker<TimePicker, LocalTime>
         }
 
         this.locale = locale;
-        this.formatter = null;
+        this.dateTimeFormatter = null;
         // we could support script & variant, but that requires more work on
         // client side to detect the different
         // number characters for other scripts (current only Arabic there)
@@ -492,11 +492,11 @@ public class TimePicker extends GeneratedVaadinTimePicker<TimePicker, LocalTime>
     }
 
     private DateTimeFormatter initializeAndReturnFormatter() {
-        if(formatter == null) {
-            formatter = locale == null ?
+        if(dateTimeFormatter == null) {
+            dateTimeFormatter = locale == null ?
                 DateTimeFormatter.ISO_LOCAL_TIME :
                 DateTimeFormatter.ISO_LOCAL_TIME.withLocale(locale);
         }
-        return formatter;
+        return dateTimeFormatter;
     }
 }
