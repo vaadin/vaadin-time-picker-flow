@@ -22,8 +22,6 @@ import com.vaadin.flow.component.timepicker.TimePicker;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.testutil.ValidationTestView;
 
-import java.time.LocalTime;
-
 /**
  * View for testing validation with {@link TimePicker}.
  */
