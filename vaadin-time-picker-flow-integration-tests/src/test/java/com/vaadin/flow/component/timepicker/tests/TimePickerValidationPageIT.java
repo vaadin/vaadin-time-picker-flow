@@ -58,7 +58,7 @@ public class TimePickerValidationPageIT extends AbstractValidationTest {
         assertValidStateOfPickerWithValidRange(!valid);
 
         // Forcing max to invalid value on the client does not make the field valid
-        element.setProperty(clientPropertyUnderTest, invalidValue.toString());
+        element.setProperty(clientPropertyUnderTest, invalidValue);
         getCommandExecutor().waitForVaadin();
         assertValidStateOfPickerWithValidRange(!valid);
 
@@ -74,11 +74,11 @@ public class TimePickerValidationPageIT extends AbstractValidationTest {
     }
 
     private void assertValidStateOfPickerWithValidRange(boolean valid) {
-        final WebElement checkIsInvalid = findElement(By.id("check-is-invalid"));
+        final WebElement checkIsInvalid = $("#check-is-invalid").first();
         checkIsInvalid.click();
 
         final String expectedValue = !valid ? "invalid" : "valid";
-        Assert.assertEquals(expectedValue, findElement(By.id("is-invalid")).getText());
+        Assert.assertEquals(expectedValue, $("#is-invalid").first().getText());
     }
 
 }
