@@ -74,11 +74,11 @@ public class TimePickerValidationPageIT extends AbstractValidationTest {
     }
 
     private void assertValidStateOfPickerWithValidRange(boolean valid) {
-        final WebElement checkIsInvalid = $("#check-is-invalid").first();
+        final WebElement checkIsInvalid = findElement(By.id("check-is-invalid"));
         checkIsInvalid.click();
 
         final String expectedValue = !valid ? "invalid" : "valid";
-        Assert.assertEquals(expectedValue, $("#is-invalid").first().getText());
+        Assert.assertEquals(expectedValue, findElement(By.id("is-invalid")).getText());
     }
 
 }
