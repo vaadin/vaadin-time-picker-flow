@@ -371,12 +371,11 @@ public class TimePicker extends GeneratedVaadinTimePicker<TimePicker, LocalTime>
         if (!locale.getCountry().isEmpty()) {
             bcp47LanguageTag.append("-").append(locale.getCountry());
         }
-        runBeforeClientResponse(ui -> getElement().callJsFunction(
-                "$connector.setLocale", bcp47LanguageTag.toString()));
         runBeforeClientResponse(ui -> {
-                PendingJavaScriptResult asyncResult = ui.getPage().executeJs(
-                    "void(0)", bcp47LanguageTag.toString());
-                asyncResult.then(x -> getElement().callJsFunction(
+                PendingJavaScriptResult asyncResult = getElement().callJsFunction(
+                        "$connector.setLocale", bcp47LanguageTag.toString());
+                asyncResult.then(x -> x.hashCode() /* do nothing on success (but needs a statement to compile */,
+                		err -> getElement().callJsFunction(
                     "$connector.setLocale", bcp47LanguageTag.toString()));
         });
 
