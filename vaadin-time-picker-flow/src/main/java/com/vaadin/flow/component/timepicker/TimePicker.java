@@ -32,6 +32,7 @@ import com.vaadin.flow.component.HasValue;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.dependency.JavaScript;
 import com.vaadin.flow.component.dependency.JsModule;
+import com.vaadin.flow.component.page.PendingJavaScriptResult;
 import com.vaadin.flow.function.SerializableConsumer;
 import com.vaadin.flow.function.SerializableFunction;
 import com.vaadin.flow.shared.Registration;
@@ -316,10 +317,10 @@ public class TimePicker extends GeneratedVaadinTimePicker<TimePicker, LocalTime>
     @Override
     protected void onAttach(AttachEvent attachEvent) {
         super.onAttach(attachEvent);
+        initConnector();
         if (getLocale() == null) {
             setLocale(attachEvent.getUI().getLocale());
         }
-        initConnector();
     }
 
     private void initConnector() {
@@ -375,6 +376,13 @@ public class TimePicker extends GeneratedVaadinTimePicker<TimePicker, LocalTime>
         }
         runBeforeClientResponse(ui -> getElement().callFunction(
                 "$connector.setLocale", bcp47LanguageTag.toString()));
+        runBeforeClientResponse(ui -> {
+                PendingJavaScriptResult asyncResult = ui.getPage().executeJs(
+                    "void(0)", bcp47LanguageTag.toString());
+                asyncResult.then(x -> getElement().callJsFunction(
+                    "$connector.setLocale", bcp47LanguageTag.toString()));
+        });
+
     }
 
     /**
