@@ -48,14 +48,11 @@ import com.vaadin.flow.shared.Registration;
 public class TimePicker extends GeneratedVaadinTimePicker<TimePicker, LocalTime>
         implements HasSize, HasValidation, HasEnabled {
 
-    private static final SerializableFunction<String, LocalTime> PARSER = valueFromClient -> {
-        return valueFromClient == null || valueFromClient.isEmpty() ? null
-                : LocalTime.parse(valueFromClient);
-    };
+    private static final SerializableFunction<String, LocalTime> PARSER = valueFromClient -> 
+        valueFromClient == null || valueFromClient.isEmpty() ? null: LocalTime.parse(valueFromClient);
 
-    private static final SerializableFunction<LocalTime, String> FORMATTER = valueFromModel -> {
-        return valueFromModel == null ? "" : valueFromModel.toString();
-    };
+    private static final SerializableFunction<LocalTime, String> FORMATTER = valueFromModel -> 
+        valueFromModel == null ? "" : valueFromModel.toString();
 
     private static final long MILLISECONDS_IN_A_DAY = 86400000L;
     private static final long MILLISECONDS_IN_AN_HOUR = 3600000L;
@@ -63,8 +60,8 @@ public class TimePicker extends GeneratedVaadinTimePicker<TimePicker, LocalTime>
     private Locale locale;
     private transient DateTimeFormatter dateTimeFormatter;
 
-    private LocalTime max;
-    private LocalTime min;
+    private transient LocalTime max;
+    private transient LocalTime min;
     private boolean required;
 
 
@@ -326,7 +323,7 @@ public class TimePicker extends GeneratedVaadinTimePicker<TimePicker, LocalTime>
     private void initConnector() {
         // can't run this with getElement().executeJavaScript(...) since then
         // setLocale might be called before this causing client side error
-        runBeforeClientResponse(ui -> ui.getPage().executeJavaScript(
+        runBeforeClientResponse(ui -> ui.getPage().executeJs(
                 "window.Vaadin.Flow.timepickerConnector.initLazy($0)",
                 getElement()));
     }
@@ -374,7 +371,7 @@ public class TimePicker extends GeneratedVaadinTimePicker<TimePicker, LocalTime>
         if (!locale.getCountry().isEmpty()) {
             bcp47LanguageTag.append("-").append(locale.getCountry());
         }
-        runBeforeClientResponse(ui -> getElement().callFunction(
+        runBeforeClientResponse(ui -> getElement().callJsFunction(
                 "$connector.setLocale", bcp47LanguageTag.toString()));
         runBeforeClientResponse(ui -> {
                 PendingJavaScriptResult asyncResult = ui.getPage().executeJs(
