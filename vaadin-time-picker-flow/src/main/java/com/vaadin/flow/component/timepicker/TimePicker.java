@@ -37,6 +37,8 @@ import com.vaadin.flow.function.SerializableConsumer;
 import com.vaadin.flow.function.SerializableFunction;
 import com.vaadin.flow.shared.Registration;
 
+import elemental.json.JsonValue;
+
 /**
  * An input component for selecting time of day, based on
  * {@code vaadin-time-picker} web component.
@@ -374,7 +376,7 @@ public class TimePicker extends GeneratedVaadinTimePicker<TimePicker, LocalTime>
         runBeforeClientResponse(ui -> {
                 PendingJavaScriptResult asyncResult = getElement().callJsFunction(
                         "$connector.setLocale", bcp47LanguageTag.toString());
-                asyncResult.then(x -> x.hashCode() /* do nothing on success (but needs a statement to compile */,
+                asyncResult.then(JsonValue::hashCode /* do nothing on success (but needs a statement to compile */,
                 		err -> getElement().callJsFunction(
                     "$connector.setLocale", bcp47LanguageTag.toString()));
         });
