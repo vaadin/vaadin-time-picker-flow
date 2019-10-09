@@ -395,14 +395,45 @@ public class TimePicker extends GeneratedVaadinTimePicker<TimePicker, LocalTime>
      * Sets the minimum time in the time picker. Times before that will be
      * disabled in the popup.
      *
+     * @deprecated use {@link #setMin(LocalTime)} instead.
+     *
      * @param min
      *            the minimum time that is allowed to be selected, or
      *            <code>null</code> to remove any minimum constraints
      */
     @Override
+    @Deprecated
     public void setMin(String min) {
         this.min = LocalTime.parse(min, initializeAndReturnFormatter());
         super.setMin(min);
+    }
+
+    /**
+     * Sets the minimum time in the time picker. Times before that will be
+     * disabled in the popup.
+     *
+     * @param min
+     *            the minimum time that is allowed to be selected, or
+     *            <code>null</code> to remove any minimum constraints
+     */
+    @Override
+    public void setMin(LocalTime min) {
+        this.min = min;
+        super.setMin(min);
+    }
+
+    /**
+     * Gets the minimum time in the time picker. Time before that will be
+     * disabled in the popup.
+     *
+     * @deprecated use {@link #getMinTime()} instead.
+     *
+     * @return the minimum time that is allowed to be selected, or
+     *         <code>null</code> if there's no minimum
+     */
+    @Deprecated
+    public String getMin() {
+        return super.getMinString();
     }
 
     /**
@@ -412,8 +443,27 @@ public class TimePicker extends GeneratedVaadinTimePicker<TimePicker, LocalTime>
      * @return the minimum time that is allowed to be selected, or
      *         <code>null</code> if there's no minimum
      */
-    public String getMin() {
-        return super.getMinString();
+    public LocalTime getMinTime() {
+        String minString = super.getMinString();
+        return minString.isEmpty() ? null :
+                LocalTime.parse(super.getMinString(), initializeAndReturnFormatter());
+    }
+
+    /**
+     * Sets the maximum time in the time picker. Times after that will be
+     * disabled in the popup.
+     *
+     * @deprecated use {@link #setMax(LocalTime)} instead.
+     *
+     * @param max
+     *            the maximum time that is allowed to be selected, or
+     *            <code>null</code> to remove any maximum constraints
+     */
+    @Override
+    @Deprecated
+    public void setMax(String max) {
+        this.max = LocalTime.parse(max, initializeAndReturnFormatter());
+        super.setMax(max);
     }
 
     /**
@@ -425,9 +475,23 @@ public class TimePicker extends GeneratedVaadinTimePicker<TimePicker, LocalTime>
      *            <code>null</code> to remove any maximum constraints
      */
     @Override
-    public void setMax(String max) {
-        this.max = LocalTime.parse(max, initializeAndReturnFormatter());
+    public void setMax(LocalTime max) {
+        this.max = max;
         super.setMax(max);
+    }
+
+    /**
+     * Gets the maximum time in the time picker. Times after that will be
+     * disabled in the popup.
+     *
+     * @deprecated use {@link #getMaxTime()} instead.
+     *
+     * @return the maximum time that is allowed to be selected, or
+     *         <code>null</code> if there's no maximum
+     */
+    @Deprecated
+    public String getMax() {
+        return super.getMaxString();
     }
 
     /**
@@ -437,8 +501,10 @@ public class TimePicker extends GeneratedVaadinTimePicker<TimePicker, LocalTime>
      * @return the maximum time that is allowed to be selected, or
      *         <code>null</code> if there's no maximum
      */
-    public String getMax() {
-        return super.getMaxString();
+    public LocalTime getMaxTime() {
+        String maxString = super.getMaxString();
+        return maxString.isEmpty() ? null :
+                LocalTime.parse(super.getMaxString(), initializeAndReturnFormatter());
     }
 
     /**

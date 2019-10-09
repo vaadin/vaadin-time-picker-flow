@@ -1,22 +1,5 @@
-// Error handling functions
-const tryCatchWrapper = function(originalFunction) {
-    return function() {
-        try {
-            const result = originalFunction.apply(this, arguments);
-            return result;
-        } catch (error) {
-            logError(error.message);
-        }
-    }
-}
-
-function logError(message) {
-    console.error("There seems to be an error in the TimePicker:\n" + message + "\n" +
-       "Please submit an issue to https://github.com/vaadin/vaadin-time-picker-flow/issues/new!");
-}
-
 window.Vaadin.Flow.timepickerConnector = {
-    initLazy: tryCatchWrapper(function (timepicker) {
+    initLazy: function (timepicker) {
         // Check whether the connector was already initialized for the timepicker
         if (timepicker.$connector) {
             return;
@@ -24,7 +7,7 @@ window.Vaadin.Flow.timepickerConnector = {
 
         timepicker.$connector = {};
 
-        const getAmPmString = tryCatchWrapper(function (locale, testTime) {
+        const getAmPmString = function (locale, testTime) {
             const testTimeString = testTime.toLocaleTimeString(locale);
             // AM/PM string is anything from one letter in eastern arabic to standard two letters,
             // to having space in between, dots ...
@@ -40,7 +23,7 @@ window.Vaadin.Flow.timepickerConnector = {
                 amPmString = amPmString[0].trim();
             }
             return amPmString;
-        });
+        };
         const testPmTime = new Date('August 19, 1975 23:15:30');
         const testAmTime = new Date('August 19, 1975 05:15:30');
 
@@ -67,18 +50,18 @@ window.Vaadin.Flow.timepickerConnector = {
         };
 
         // parses eastern arabic number characters to arabic numbers (0-9)
-        const anyNumberCharToArabicNumberReplacer = tryCatchWrapper(function (charsToReplace) {
+        const anyNumberCharToArabicNumberReplacer = function (charsToReplace) {
             return charsToReplace.replace(/[\u0660-\u0669]/g, function (char) {
                 const unicode = '\\u0' + char.charCodeAt(0).toString(16);
                 return arabicDigitMap[unicode];
             });
-        });
+        };
 
         const parseAnyCharsToInt = function (anyNumberChars) {
             return parseInt(anyNumberCharToArabicNumberReplacer(anyNumberChars));
         };
 
-        const parseMillisecondCharsToInt = tryCatchWrapper(function (millisecondChars) {
+        const parseMillisecondCharsToInt = function (millisecondChars) {
             millisecondChars = anyNumberCharToArabicNumberReplacer(millisecondChars);
             // digits are either .1 .01 or .001 so need to "shift"
             if (millisecondChars.length === 1) {
@@ -87,12 +70,12 @@ window.Vaadin.Flow.timepickerConnector = {
                 millisecondChars += "0";
             }
             return parseInt(millisecondChars);
-        });
+        };
 
         // detecting milliseconds from input, expects am/pm removed from end, eg. .0 or .00 or .000
         const millisecondRegExp = /[[\.][\d\u0660-\u0669]{1,3}$/;
 
-        timepicker.$connector.setLocale = tryCatchWrapper(function (locale) {
+        timepicker.$connector.setLocale = function (locale) {
             // capture previous value if any
             let previousValueObject;
             if (timepicker.value && timepicker.value !== '') {
@@ -105,7 +88,7 @@ window.Vaadin.Flow.timepickerConnector = {
             } catch (e) {
                 locale = "en-US";
                 // FIXME should do a callback for server to throw an exception ?
-                throw new Error("vaadin-time-picker: The locale " + locale + " is not supported, falling back to default locale setting(en-US).");
+                console.error("vaadin-time-picker: The locale " + locale + " is not supported, falling back to default locale setting(en-US).");
             }
 
             // 1. 24 or 12 hour clock, if latter then what are the am/pm strings ?
@@ -136,7 +119,7 @@ window.Vaadin.Flow.timepickerConnector = {
             // thus need to format the time object in correct granularity by passing the format options
             let cachedStep;
             let cachedOptions;
-            const getTimeFormatOptions = tryCatchWrapper(function () {
+            const getTimeFormatOptions = function () {
                 // calculate the format options if none done cached or step has changed
                 if (!cachedOptions || cachedStep !== timepicker.step) {
                     cachedOptions = {
@@ -147,9 +130,9 @@ window.Vaadin.Flow.timepickerConnector = {
                     cachedStep = timepicker.step;
                 }
                 return cachedOptions;
-            });
+            };
 
-            const formatMilliseconds = tryCatchWrapper(function (localeTimeString, milliseconds) {
+            const formatMilliseconds = function (localeTimeString, milliseconds) {
                 if (includeMilliSeconds()) {
                     // might need to inject milliseconds between seconds and AM/PM
                     let cleanedTimeString = localeTimeString;
@@ -174,7 +157,7 @@ window.Vaadin.Flow.timepickerConnector = {
                     return cleanedTimeString;
                 }
                 return localeTimeString;
-            });
+            };
 
             let cachedTimeString;
             let cachedTimeObject;
@@ -248,6 +231,6 @@ window.Vaadin.Flow.timepickerConnector = {
                     timepicker.__onInputChange();
                 }
             }
-        })
-    })
+        }
+    }
 };
