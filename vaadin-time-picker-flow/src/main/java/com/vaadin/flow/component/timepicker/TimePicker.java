@@ -416,10 +416,9 @@ public class TimePicker extends GeneratedVaadinTimePicker<TimePicker, LocalTime>
      *            the minimum time that is allowed to be selected, or
      *            <code>null</code> to remove any minimum constraints
      */
-    @Override
     public void setMin(LocalTime min) {
         this.min = min;
-        super.setMin(min);
+        super.setMin(min.format(initializeAndReturnFormatter()));
     }
 
     /**
@@ -444,9 +443,7 @@ public class TimePicker extends GeneratedVaadinTimePicker<TimePicker, LocalTime>
      *         <code>null</code> if there's no minimum
      */
     public LocalTime getMinTime() {
-        String minString = super.getMinString();
-        return minString.isEmpty() ? null :
-                LocalTime.parse(super.getMinString(), initializeAndReturnFormatter());
+        return this.min;
     }
 
     /**
@@ -474,10 +471,9 @@ public class TimePicker extends GeneratedVaadinTimePicker<TimePicker, LocalTime>
      *            the maximum time that is allowed to be selected, or
      *            <code>null</code> to remove any maximum constraints
      */
-    @Override
     public void setMax(LocalTime max) {
         this.max = max;
-        super.setMax(max);
+        super.setMax(max.format(initializeAndReturnFormatter()));
     }
 
     /**
@@ -502,9 +498,7 @@ public class TimePicker extends GeneratedVaadinTimePicker<TimePicker, LocalTime>
      *         <code>null</code> if there's no maximum
      */
     public LocalTime getMaxTime() {
-        String maxString = super.getMaxString();
-        return maxString.isEmpty() ? null :
-                LocalTime.parse(super.getMaxString(), initializeAndReturnFormatter());
+        return this.max;
     }
 
     /**
