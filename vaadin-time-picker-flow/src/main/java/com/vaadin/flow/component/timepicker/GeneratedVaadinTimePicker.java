@@ -34,9 +34,6 @@ import com.vaadin.flow.shared.Registration;
 
 import elemental.json.JsonObject;
 
-import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
-
 /**
  * <p>
  * Description copied from corresponding location in WebComponent:
@@ -536,30 +533,11 @@ public abstract class GeneratedVaadinTimePicker<R extends GeneratedVaadinTimePic
      * <li>{@code hh:mm:ss.fff}</li>
      * </ul>
      *
-     * @deprecated use {@link #setMin(LocalTime)} instead.
-     *
      * @param min
      *            the String value to set
      */
-    @Deprecated
     protected void setMin(String min) {
         getElement().setProperty("min", min == null ? "" : min);
-    }
-
-    /**
-     * <p>
-     * Description copied from corresponding location in WebComponent:
-     * </p>
-     * <p>
-     * Minimum time allowed.
-     * </p>
-     *
-     * @param min
-     *            the LocalTime value to set
-     */
-    protected void setMin(LocalTime min) {
-        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ISO_LOCAL_TIME;
-        getElement().setProperty("min", min == null ? "" : min.format(dateTimeFormatter));
     }
 
     /**
@@ -603,30 +581,11 @@ public abstract class GeneratedVaadinTimePicker<R extends GeneratedVaadinTimePic
      * <li>{@code hh:mm:ss.fff}</li>
      * </ul>
      *
-     * @deprecated use {@link #setMax(LocalTime)} instead.
-     *
      * @param max
      *            the String value to set
      */
-    @Deprecated
     protected void setMax(String max) {
         getElement().setProperty("max", max == null ? "" : max);
-    }
-
-    /**
-     * <p>
-     * Description copied from corresponding location in WebComponent:
-     * </p>
-     * <p>
-     * Maximum time allowed.
-     * </p>
-     *
-     * @param max
-     *            the LocalTime value to set
-     */
-    protected void setMax(LocalTime max) {
-        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ISO_LOCAL_TIME;
-        getElement().setProperty("max", max == null ? "" : max.format(dateTimeFormatter));
     }
 
     /**
