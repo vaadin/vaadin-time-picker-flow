@@ -472,7 +472,6 @@ public abstract class GeneratedVaadinTimePicker<R extends GeneratedVaadinTimePic
      *
      * @return the {@code invalid} property from the webcomponent
      */
-    @Synchronize(property = "invalid", value = "invalid-changed")
     protected boolean isInvalidBoolean() {
         return getElement().getProperty("invalid", false);
     }

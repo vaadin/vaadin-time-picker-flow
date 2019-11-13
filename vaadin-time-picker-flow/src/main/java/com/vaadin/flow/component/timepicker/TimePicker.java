@@ -82,12 +82,13 @@ public class TimePicker extends GeneratedVaadinTimePicker<TimePicker, LocalTime>
      */
     public TimePicker(LocalTime time) {
         super(time, null, String.class, PARSER, FORMATTER);
-        addInvalidChangeListener(e -> {
-            // If invalid is updated from client to false, check it
-            if(e.isFromClient() && !e.isInvalid()) {
-                setInvalid(isInvalid(getValue()));
-            }
-        });
+
+        // workaround for https://github.com/vaadin/flow/issues/3496
+        setInvalid(false);
+
+        addValueChangeListener(e -> validate());
+
+        FieldValidationUtil.disableClientValidation(this);
     }
 
     /**
@@ -225,7 +226,7 @@ public class TimePicker extends GeneratedVaadinTimePicker<TimePicker, LocalTime>
 
     @Override
     public void setRequiredIndicatorVisible(boolean requiredIndicatorVisible) {
-        super.setRequiredIndicatorVisible(required);
+        super.setRequiredIndicatorVisible(requiredIndicatorVisible);
         this.required = requiredIndicatorVisible;
     }
 
@@ -305,12 +306,6 @@ public class TimePicker extends GeneratedVaadinTimePicker<TimePicker, LocalTime>
     public Registration addInvalidChangeListener(
             ComponentEventListener<InvalidChangeEvent<TimePicker>> listener) {
         return super.addInvalidChangeListener(listener);
-    }
-
-    @Override
-    protected void setModelValue(LocalTime newModelValue, boolean fromClient) {
-        super.setModelValue(newModelValue, fromClient);
-        setInvalid(isInvalid(newModelValue));
     }
 
     @Override
