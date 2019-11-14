@@ -38,7 +38,7 @@ public class TimePickerBinderValidationIT extends AbstractComponentIT {
     @Test
     public void selectTimeOnSimpleTimePicker() {
         final TimePickerElement element = $(TimePickerElement.class).waitForFirst();
-        Assert.assertFalse(element.getPropertyBoolean("invalid"));
+        Assert.assertTrue(element.getPropertyBoolean("invalid"));
     }
 
     private void setInternalValidBinderInvalidValue(TimePickerElement field) {
@@ -91,7 +91,7 @@ public class TimePickerBinderValidationIT extends AbstractComponentIT {
         setInternalValidBinderInvalidValue(field);
 
         field.getCommandExecutor().executeScript(
-                "arguments[0].checkedValidity = arguments[0].checkValidity()",
+                "arguments[0].checkedValidity = !!arguments[0].checkValidity()",
                 field);
 
         // Ensure checkValidity still works
