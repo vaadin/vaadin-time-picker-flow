@@ -308,6 +308,16 @@ public class TimePicker extends GeneratedVaadinTimePicker<TimePicker, LocalTime>
         return super.addInvalidChangeListener(listener);
     }
 
+    /**
+     * Performs server-side validation of the current value. This is needed
+     * because it is possible to circumvent the client-side validation
+     * constraints using browser development tools.
+     */
+    @Override
+    protected void validate() {
+        setInvalid(isInvalid(getValue()));
+    }
+
     @Override
     protected void onAttach(AttachEvent attachEvent) {
         super.onAttach(attachEvent);

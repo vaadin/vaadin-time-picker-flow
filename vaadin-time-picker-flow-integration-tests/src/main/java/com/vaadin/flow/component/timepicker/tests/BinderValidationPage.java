@@ -31,9 +31,9 @@ public class BinderValidationPage extends Div {
 
     public BinderValidationPage() {
         Binder<AData> binder = new Binder<>(AData.class);
-        TimePicker timePicker = new TimePicker("Date");
+        TimePicker timePicker = new TimePicker("Time");
 
-        // Set date field validation constraint
+        // Set time field validation constraint
         timePicker.setMin("13:00:00");
 
         // Set invalid indicator label
@@ -45,10 +45,8 @@ public class BinderValidationPage extends Div {
             timeFieldElement.setProperty("label", label == null ? "" : label);
         });
 
-        timePicker.setRequiredIndicatorVisible(true);
-
-        binder.forField(timePicker).withValidator(value -> value != null &&
-                value.compareTo(LocalTime.of(14, 0, 0)) > -1, BINDER_ERROR_MSG)
+        binder.forField(timePicker).asRequired().withValidator(value -> value != null &&
+                value.compareTo(LocalTime.of(15, 0, 0)) > -1, BINDER_ERROR_MSG)
                 .bind(AData::getTime, AData::setTime);
 
         add(timePicker);
