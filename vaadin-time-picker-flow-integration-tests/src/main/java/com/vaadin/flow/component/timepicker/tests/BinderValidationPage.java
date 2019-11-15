@@ -37,10 +37,11 @@ public class BinderValidationPage extends Div {
         timePicker.setMin("13:00:00");
 
         // Set invalid indicator label
+        String invalidString = "invalid";
         Element timeFieldElement = timePicker.getElement();
-        timeFieldElement.addPropertyChangeListener("invalid", event -> {
-            String label = timeFieldElement.getProperty("invalid", false)
-                    ? "invalid"
+        timeFieldElement.addPropertyChangeListener(invalidString, event -> {
+            String label = timeFieldElement.getProperty(invalidString, false)
+                    ? invalidString
                     : "valid";
             timeFieldElement.setProperty("label", label == null ? "" : label);
         });
