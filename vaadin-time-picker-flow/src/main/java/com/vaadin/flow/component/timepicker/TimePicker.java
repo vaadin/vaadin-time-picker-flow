@@ -409,7 +409,7 @@ public class TimePicker extends GeneratedVaadinTimePicker<TimePicker, LocalTime>
     @Override
     @Deprecated
     public void setMin(String min) {
-        this.min = LocalTime.parse(min, initializeAndReturnFormatter());
+        this.min = min != null ? LocalTime.parse(min, initializeAndReturnFormatter()) : null;
         super.setMin(min);
     }
 
@@ -464,7 +464,7 @@ public class TimePicker extends GeneratedVaadinTimePicker<TimePicker, LocalTime>
     @Override
     @Deprecated
     public void setMax(String max) {
-        this.max = LocalTime.parse(max, initializeAndReturnFormatter());
+        this.max = max != null ? LocalTime.parse(max, initializeAndReturnFormatter()) : null;
         super.setMax(max);
     }
 

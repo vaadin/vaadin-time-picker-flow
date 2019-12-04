@@ -159,11 +159,27 @@ public class TimePickerTest {
     }
 
     @Test
+    public void setMin_getMin_null() {
+        TimePicker timePicker = new TimePicker();
+        assertEquals(null, timePicker.getMin());
+        timePicker.setMin(null);
+        assertEquals("", timePicker.getMin());
+    }
+
+    @Test
     public void setMax_getMax() {
         TimePicker timePicker = new TimePicker();
         LocalTime maxTime = LocalTime.parse("12:00");
         timePicker.setMaxTime(maxTime);
         assertEquals(maxTime, timePicker.getMaxTime());
+    }
+
+    @Test
+    public void setMax_getMax_null() {
+        TimePicker timePicker = new TimePicker();
+        assertEquals(null, timePicker.getMax());
+        timePicker.setMax(null);
+        assertEquals("", timePicker.getMax());
     }
 
     @Test
