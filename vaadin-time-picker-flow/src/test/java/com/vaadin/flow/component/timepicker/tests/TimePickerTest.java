@@ -18,7 +18,6 @@ package com.vaadin.flow.component.timepicker.tests;
 import java.time.Duration;
 import java.time.LocalTime;
 
-import org.junit.Assert;
 import org.junit.Test;
 
 import com.vaadin.flow.component.timepicker.TimePicker;
@@ -155,7 +154,7 @@ public class TimePickerTest {
     public void setMin_getMin() {
         TimePicker timePicker = new TimePicker();
         LocalTime minTime = LocalTime.parse("12:00");
-        timePicker.setMin(minTime);
+        timePicker.setMinTime(minTime);
         assertEquals(minTime, timePicker.getMinTime());
     }
 
@@ -163,7 +162,7 @@ public class TimePickerTest {
     public void setMax_getMax() {
         TimePicker timePicker = new TimePicker();
         LocalTime maxTime = LocalTime.parse("12:00");
-        timePicker.setMax(maxTime);
+        timePicker.setMaxTime(maxTime);
         assertEquals(maxTime, timePicker.getMaxTime());
     }
 

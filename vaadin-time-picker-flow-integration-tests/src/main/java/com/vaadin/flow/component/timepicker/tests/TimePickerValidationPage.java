@@ -41,8 +41,8 @@ public class TimePickerValidationPage extends ValidationTestView {
 
     private void createPickerWithMaxAndMinValues() {
         final TimePicker timePicker = new TimePicker();
-        timePicker.setMin(LocalTime.parse("09:30"));
-        timePicker.setMax(LocalTime.parse("17:00"));
+        timePicker.setMinTime(LocalTime.parse("09:30"));
+        timePicker.setMaxTime(LocalTime.parse("17:00"));
         timePicker.setId("picker-with-valid-range");
 
         final Div isValid = new Div();

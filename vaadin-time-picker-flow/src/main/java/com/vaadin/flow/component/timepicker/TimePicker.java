@@ -400,7 +400,7 @@ public class TimePicker extends GeneratedVaadinTimePicker<TimePicker, LocalTime>
      * Sets the minimum time in the time picker. Times before that will be
      * disabled in the popup.
      *
-     * @deprecated use {@link #setMin(LocalTime)} instead.
+     * @deprecated use {@link #setMinTime(LocalTime)} instead.
      *
      * @param min
      *            the minimum time that is allowed to be selected, or
@@ -421,7 +421,7 @@ public class TimePicker extends GeneratedVaadinTimePicker<TimePicker, LocalTime>
      *            the minimum time that is allowed to be selected, or
      *            <code>null</code> to remove any minimum constraints
      */
-    public void setMin(LocalTime min) {
+    public void setMinTime(LocalTime min) {
         this.min = min;
         super.setMin(min.format(initializeAndReturnFormatter()));
     }
@@ -455,7 +455,7 @@ public class TimePicker extends GeneratedVaadinTimePicker<TimePicker, LocalTime>
      * Sets the maximum time in the time picker. Times after that will be
      * disabled in the popup.
      *
-     * @deprecated use {@link #setMax(LocalTime)} instead.
+     * @deprecated use {@link #setMaxTime(LocalTime)} instead.
      *
      * @param max
      *            the maximum time that is allowed to be selected, or
@@ -476,7 +476,7 @@ public class TimePicker extends GeneratedVaadinTimePicker<TimePicker, LocalTime>
      *            the maximum time that is allowed to be selected, or
      *            <code>null</code> to remove any maximum constraints
      */
-    public void setMax(LocalTime max) {
+    public void setMaxTime(LocalTime max) {
         this.max = max;
         super.setMax(max.format(initializeAndReturnFormatter()));
     }
