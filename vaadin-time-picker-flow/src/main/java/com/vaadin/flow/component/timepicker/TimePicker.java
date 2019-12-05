@@ -409,7 +409,7 @@ public class TimePicker extends GeneratedVaadinTimePicker<TimePicker, LocalTime>
     @Override
     @Deprecated
     public void setMin(String min) {
-        this.min = min != null ? LocalTime.parse(min, initializeAndReturnFormatter()) : null;
+        this.min = parse(min, initializeAndReturnFormatter());
         super.setMin(min);
     }
 
@@ -423,7 +423,7 @@ public class TimePicker extends GeneratedVaadinTimePicker<TimePicker, LocalTime>
      */
     public void setMinTime(LocalTime min) {
         this.min = min;
-        super.setMin(min.format(initializeAndReturnFormatter()));
+        super.setMin(format(min));
     }
 
     /**
@@ -464,7 +464,7 @@ public class TimePicker extends GeneratedVaadinTimePicker<TimePicker, LocalTime>
     @Override
     @Deprecated
     public void setMax(String max) {
-        this.max = max != null ? LocalTime.parse(max, initializeAndReturnFormatter()) : null;
+        this.max = parse(max, initializeAndReturnFormatter());
         super.setMax(max);
     }
 
@@ -478,7 +478,7 @@ public class TimePicker extends GeneratedVaadinTimePicker<TimePicker, LocalTime>
      */
     public void setMaxTime(LocalTime max) {
         this.max = max;
-        super.setMax(max.format(initializeAndReturnFormatter()));
+        super.setMax(format(max));
     }
 
     /**
@@ -564,4 +564,13 @@ public class TimePicker extends GeneratedVaadinTimePicker<TimePicker, LocalTime>
         }
         return dateTimeFormatter;
     }
+
+    private static String format(LocalTime time) {
+        return time != null ? time.toString() : null;
+    }
+
+    private static LocalTime parse(String time, DateTimeFormatter formatter) {
+        return time != null ? LocalTime.parse(time, formatter) : null;
+    }
+
 }
