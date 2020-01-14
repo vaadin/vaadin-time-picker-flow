@@ -37,7 +37,7 @@ import com.vaadin.flow.testutil.AbstractComponentIT;
 import com.vaadin.flow.testutil.TestPath;
 
 @TestPath("time-picker-localization")
-public class TimePickerLocalizationIT extends AbstractComponentIT {
+public class TimePickerLocalizationIT extends AbstractTimePickerIT {
 
     // Maximum is `Locale.getAvailableLocales()` about 159 that makes the
     // test to take several minutes, testing a few of them also guarantees

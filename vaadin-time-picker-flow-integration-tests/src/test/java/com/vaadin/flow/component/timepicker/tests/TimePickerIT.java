@@ -15,6 +15,7 @@
  */
 package com.vaadin.flow.component.timepicker.tests;
 
+import com.vaadin.testbench.parallel.Browser;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -25,6 +26,9 @@ import com.vaadin.flow.component.combobox.testbench.ComboBoxElement;
 import com.vaadin.flow.component.timepicker.demo.TimePickerView;
 import com.vaadin.flow.component.timepicker.testbench.TimePickerElement;
 import com.vaadin.flow.demo.ComponentDemoTest;
+import org.openqa.selenium.remote.DesiredCapabilities;
+
+import java.util.List;
 
 /**
  * Integration tests for the {@link TimePickerView}.
@@ -34,6 +38,12 @@ public class TimePickerIT extends ComponentDemoTest {
     @Before
     public void init() {
         $(TimePickerElement.class).waitForFirst();
+    }
+
+   @Override
+    protected List<DesiredCapabilities> getBrowserCapabilities(
+        Browser... browsers) {
+        return AbstractTimePickerIT.enhanceCapabilities(super.getBrowserCapabilities(browsers));
     }
 
     @Test

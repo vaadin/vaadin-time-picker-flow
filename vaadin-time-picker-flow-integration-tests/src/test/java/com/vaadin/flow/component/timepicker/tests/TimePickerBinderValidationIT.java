@@ -18,17 +18,25 @@ package com.vaadin.flow.component.timepicker.tests;
 import com.vaadin.flow.component.timepicker.testbench.TimePickerElement;
 import com.vaadin.flow.testutil.AbstractComponentIT;
 import com.vaadin.flow.testutil.TestPath;
+import com.vaadin.testbench.TestBench;
+import com.vaadin.testbench.parallel.Browser;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import org.openqa.selenium.PageLoadStrategy;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 
+import java.lang.management.ManagementFactory;
 import java.util.Collections;
 
 /**
  * Integration tests for the {@link BinderValidationPage}.
  */
 @TestPath("binder-validation")
-public class TimePickerBinderValidationIT extends AbstractComponentIT {
+public class TimePickerBinderValidationIT extends AbstractTimePickerIT {
+
 
     @Before
     public void init() {
@@ -40,6 +48,7 @@ public class TimePickerBinderValidationIT extends AbstractComponentIT {
         final TimePickerElement element = $(TimePickerElement.class).waitForFirst();
         Assert.assertTrue(element.getPropertyBoolean("invalid"));
     }
+
 
     private void setInternalValidBinderInvalidValue(TimePickerElement field) {
         field.setValue("14:00");

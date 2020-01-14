@@ -19,15 +19,24 @@ import com.vaadin.flow.component.timepicker.TimePicker;
 import com.vaadin.flow.component.timepicker.testbench.TimePickerElement;
 import com.vaadin.flow.testutil.AbstractValidationTest;
 import com.vaadin.flow.testutil.TestPath;
+import com.vaadin.testbench.parallel.Browser;
 import org.junit.Assert;
 import org.junit.Test;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.remote.DesiredCapabilities;
+
+import java.util.List;
 
 /**
  * Integration tests for {@link TimePicker} validation.
  */
 @TestPath("time-picker-validation")
 public class TimePickerValidationPageIT extends AbstractValidationTest {
+    @Override
+    protected List<DesiredCapabilities> getBrowserCapabilities(
+        Browser... browsers) {
+        return AbstractTimePickerIT.enhanceCapabilities(super.getBrowserCapabilities(browsers));
+    }
 
     @Test
     public void assertInvalidAfterClientChangeMax() {

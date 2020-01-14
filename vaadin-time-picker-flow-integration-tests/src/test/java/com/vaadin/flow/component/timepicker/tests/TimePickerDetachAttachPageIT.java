@@ -27,7 +27,7 @@ import org.openqa.selenium.WebElement;
  * Integration tests for attaching / detaching time picker.
  */
 @TestPath("time-picker-detach-attach")
-public class TimePickerDetachAttachPageIT extends AbstractComponentIT {
+public class TimePickerDetachAttachPageIT extends AbstractTimePickerIT {
 
     @Test
     public void clientSideValidationIsOverriddenOnAttach() {
