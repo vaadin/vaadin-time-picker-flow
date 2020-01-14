@@ -44,8 +44,12 @@ public abstract class AbstractTimePickerIT extends AbstractComponentIT {
     }
 
     static List<DesiredCapabilities> enhanceCapabilities(List<DesiredCapabilities> capabilities) {
-
-        capabilities.stream().filter(cap -> "chrome".equalsIgnoreCase(cap.getBrowserName())).forEach(cap -> cap.setCapability("pageLoadStrategy","none"));
+        capabilities.stream().filter(cap -> "chrome".equalsIgnoreCase(cap.getBrowserName())).forEach(AbstractTimePickerIT::enhanceCapabilities);
         return capabilities;
+    }
+
+    static void enhanceCapabilities(DesiredCapabilities cap) {
+        cap.setCapability("pageLoadStrategy","none");
+        cap.setCapability(ChromeOptions.CAPABILITY,"--headless --disable-gpu");
     }
 }
