@@ -50,9 +50,8 @@
 
         <dependency>
             <groupId>com.vaadin</groupId>
-            <!-- TODO to be updated to 4.0 once available -->
             <artifactId>vaadin-combo-box-flow</artifactId>
-            <version>3.0-SNAPSHOT</version>
+            <version>4.0-SNAPSHOT</version>
         </dependency>
 
         <dependency>
