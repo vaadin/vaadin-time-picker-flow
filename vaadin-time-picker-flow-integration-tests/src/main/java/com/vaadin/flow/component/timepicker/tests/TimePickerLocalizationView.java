@@ -29,11 +29,7 @@ import com.vaadin.flow.router.Route;
 import java.time.Duration;
 import java.time.LocalTime;
 import java.time.temporal.ChronoField;
-import java.time.temporal.ChronoUnit;
-import java.time.temporal.TemporalUnit;
-import java.util.Arrays;
 import java.util.Locale;
-import java.util.concurrent.TimeUnit;
 import java.util.stream.Stream;
 
 @Route("time-picker-localization")
@@ -47,8 +43,13 @@ public class TimePickerLocalizationView extends Div
         Stream<Locale> supportedAvailableLocales = TimePicker
                 .getSupportedAvailableLocales();
         ComboBox<Locale> localesCB = new ComboBox<>();
-        localesCB.setItemLabelGenerator(
-                TimePickerLocalizationView::getLocaleString);
+
+        System.out.println("--- GAD test debug log locale items ---");
+        localesCB.setItemLabelGenerator(locale -> {
+            System.out.println(TimePickerLocalizationView.getLocaleString(locale));
+            return getLocaleString(locale);
+        });
+        System.out.println("--------------------------");
         localesCB.setWidth("300px");
         localesCB.setItems(supportedAvailableLocales);
         localesCB.setId("locale-picker");
@@ -60,9 +61,12 @@ public class TimePickerLocalizationView extends Div
                 Duration.ofSeconds(1), Duration.ofSeconds(10),
                 Duration.ofMinutes(1), Duration.ofMinutes(15),
                 Duration.ofMinutes(30), Duration.ofHours(1));
+        System.out.println("--- GAD test debug log step items ---");
         stepSelector.setItemLabelGenerator(duration -> {
+            System.out.println(duration.toString().replace("PT", "").toLowerCase());
             return duration.toString().replace("PT", "").toLowerCase();
         });
+        System.out.println("--------------------------");
         stepSelector.setId("step-picker");
         stepSelector.setValue(timePicker.getStep());
 
