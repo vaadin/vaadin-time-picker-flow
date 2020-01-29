@@ -26,6 +26,7 @@ import java.util.stream.Collectors;
 
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.openqa.selenium.By;
 
@@ -55,6 +56,7 @@ public class TimePickerLocalizationIT extends AbstractComponentIT {
         return super.getDeploymentPort();
     }
 
+    // TIMEOUT ISSUE
     @Test
     public void testAllAvailableLocalesWhenValueChangedFromDropDown_stepOneHourAndFormatHourMinute_pickerValuesMatchesBrowserFormatted() {
         // select locale based on locale string
@@ -74,6 +76,7 @@ public class TimePickerLocalizationIT extends AbstractComponentIT {
         runLocalisationTestPattern(values, valueIndices);
     }
 
+    // TIMEOUT ISSUE
     @Test
     public void testAllAvailableLocalesWhenValueChangedFromDropDown_step30Minutes_pickerValuesMatchesBrowserFormatted() {
         // same stuff as the previous test, but instead use a different step
@@ -92,6 +95,7 @@ public class TimePickerLocalizationIT extends AbstractComponentIT {
     }
 
     @Test
+    @Ignore
     public void testMilliseconds_localeWithColonSeparator_inputParsedProperly() {
         // 12h : separator
         runMillisecondLocalizationTest(Locale.US, ":", "AM");
@@ -107,6 +111,7 @@ public class TimePickerLocalizationIT extends AbstractComponentIT {
     }
 
     @Test
+    @Ignore
     public void testInitialValue_nonDefaultLocale_initialValueLocalizedCorrectly() {
         runInitialLoadValueTestPattern("en-US", "15:00");
         runInitialLoadValueTestPattern("en-CA", "03:00");
@@ -119,6 +124,7 @@ public class TimePickerLocalizationIT extends AbstractComponentIT {
         runInitialLoadValueTestPattern("es-PA", "15:00");
     }
 
+    // TIMEOUT ISSUE
     @Test
     public void testChangingStep_reduceStepToHigherScale_valueIsNotTooDetailed() {
         runReduceStepTest(new Locale("en-US"), "4:00 PM", "PM");

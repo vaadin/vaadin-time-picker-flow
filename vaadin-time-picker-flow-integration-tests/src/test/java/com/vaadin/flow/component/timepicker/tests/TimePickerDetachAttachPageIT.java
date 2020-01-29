@@ -18,6 +18,7 @@ package com.vaadin.flow.component.timepicker.tests;
 import com.vaadin.flow.testutil.AbstractComponentIT;
 import com.vaadin.flow.testutil.TestPath;
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
@@ -27,6 +28,7 @@ import org.openqa.selenium.WebElement;
  * Integration tests for attaching / detaching time picker.
  */
 @TestPath("time-picker-detach-attach")
+@Ignore
 public class TimePickerDetachAttachPageIT extends AbstractComponentIT {
 
     @Test

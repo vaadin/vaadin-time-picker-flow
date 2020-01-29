@@ -17,6 +17,7 @@ package com.vaadin.flow.component.timepicker.tests;
 
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -29,6 +30,7 @@ import com.vaadin.flow.demo.ComponentDemoTest;
 /**
  * Integration tests for the {@link TimePickerView}.
  */
+@Ignore
 public class TimePickerIT extends ComponentDemoTest {
 
     @Before
