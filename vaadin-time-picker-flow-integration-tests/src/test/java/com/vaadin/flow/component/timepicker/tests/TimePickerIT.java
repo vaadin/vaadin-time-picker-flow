@@ -62,40 +62,6 @@ public class TimePickerIT extends ComponentDemoTest {
     }
 
     @Test
-    public void timePickerWithDifferentStep() {
-        TimePickerElement picker = $(TimePickerElement.class)
-                .id("step-setting-picker");
-        picker.scrollIntoView();
-        picker.openDropDown();
-        Assert.assertEquals("Item in the dropdown is not correct", "1:00 AM",
-                picker.getItemText(1));
-        picker.closeDropDown();
-        executeScript("arguments[0].value = '12:31'", picker);
-
-        selectStep("0.5s");
-        validatePickerValue(picker, "12:31:00.000");
-
-        selectStep("10s");
-        validatePickerValue(picker, "12:31:00");
-
-        // for the auto formatting of the value to work, it needs to match the
-        // new step
-        executeScript("arguments[0].value = '12:30:00'", picker);
-        selectStep("30m"); // using smaller step will cause the drop down to be
-                           // big and then drop down iron list does magic that
-                           // messes the item indexes
-        validatePickerValue(picker, "12:30");
-
-        // Fails in chrome-headless (6:30 PM) but not using normal chrome (12:30
-        // AM)
-        // picker.openDropDown();
-        // Assert.assertEquals("Item in the dropdown is not correct", "12:30
-        // AM",
-        // picker.getItemText(1));
-        // picker.closeDropDown();
-    }
-
-    @Test
     public void timePickerWithMinAndMaxSetting() {
         TimePickerElement picker = $(TimePickerElement.class)
                 .id("time-picker-min-max");
@@ -107,17 +73,6 @@ public class TimePickerIT extends ComponentDemoTest {
         Assert.assertEquals(
                 "The last item in the dropdown should be the max value",
                 "6:00 PM", picker.getLastItemText());
-    }
-
-    private void selectStep(String step) {
-        NativeSelectElement select = $(NativeSelectElement.class)
-                .id("step-picker");
-        select.setValue(step);
-    }
-
-    private void validatePickerValue(TimePickerElement picker, String value) {
-        Assert.assertEquals("Invalid time picker value", value,
-                picker.getValue());
     }
 
     @Override
