@@ -43,8 +43,6 @@ public class TimePickerLocalizationView extends Div
     private final TimePickerView.LocalTimeTextBlock browserFormattedTime;
 
     public TimePickerLocalizationView() {
-        Stream<Locale> supportedAvailableLocales = TimePicker
-                .getSupportedAvailableLocales();
         NativeSelect localesSelect = new NativeSelect();
         localesSelect.setWidth("230px");
         localesSelect.setOptions(TimePicker.getSupportedAvailableLocales()
