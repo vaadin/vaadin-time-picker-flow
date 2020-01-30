@@ -21,7 +21,6 @@ import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
-import com.vaadin.flow.component.combobox.testbench.ComboBoxElement;
 import com.vaadin.flow.component.timepicker.demo.TimePickerView;
 import com.vaadin.flow.component.timepicker.testbench.TimePickerElement;
 import com.vaadin.flow.demo.ComponentDemoTest;
@@ -87,11 +86,13 @@ public class TimePickerIT extends ComponentDemoTest {
                            // messes the item indexes
         validatePickerValue(picker, "12:30");
 
-        // Fails in chrome-headless (6:30 PM) but not using normal chrome (12:30 AM)
-//        picker.openDropDown();
-//        Assert.assertEquals("Item in the dropdown is not correct", "12:30 AM",
-//                picker.getItemText(1));
-//        picker.closeDropDown();
+        // Fails in chrome-headless (6:30 PM) but not using normal chrome (12:30
+        // AM)
+        // picker.openDropDown();
+        // Assert.assertEquals("Item in the dropdown is not correct", "12:30
+        // AM",
+        // picker.getItemText(1));
+        // picker.closeDropDown();
     }
 
     @Test
@@ -100,16 +101,18 @@ public class TimePickerIT extends ComponentDemoTest {
                 .id("time-picker-min-max");
         picker.scrollIntoView();
         picker.openDropDown();
-        Assert.assertEquals("The first item in the dropdown should be the min value",
+        Assert.assertEquals(
+                "The first item in the dropdown should be the min value",
                 "5:00 AM", picker.getItemText(0));
-        Assert.assertEquals("The last item in the dropdown should be the max value",
+        Assert.assertEquals(
+                "The last item in the dropdown should be the max value",
                 "6:00 PM", picker.getLastItemText());
     }
 
     private void selectStep(String step) {
-        ComboBoxElement comboBox = $(ComboBoxElement.class).id("step-picker");
-        selectFromComboBox(comboBox, step);
-        waitForElementNotPresent(By.tagName("vaadin-combo-box-overlay"));
+        NativeSelectElement select = $(NativeSelectElement.class)
+                .id("step-picker");
+        select.setValue(step);
     }
 
     private void validatePickerValue(TimePickerElement picker, String value) {
@@ -120,24 +123,5 @@ public class TimePickerIT extends ComponentDemoTest {
     @Override
     protected String getTestPath() {
         return ("/vaadin-time-picker");
-    }
-
-    public static void selectFromComboBox(ComboBoxElement comboBox,
-            String text) {
-        try {
-            comboBox.selectByText(text);
-        } catch (IllegalArgumentException iae) {
-            // ignore due to issues in the TB element for CB
-            // the element selects the correct item, but then throws IAE
-            // because it tries to validate the selection. Probably regression
-            // with CB 2.0 ?
-        }
-
-        Assert.assertEquals("The current value is not incorrect",
-                text.toLowerCase(), comboBox.$("vaadin-text-field").first()
-                        .getPropertyString("value").toLowerCase());
-
-        comboBox.getCommandExecutor().executeScript("arguments[0].close()",
-                comboBox);
     }
 }
