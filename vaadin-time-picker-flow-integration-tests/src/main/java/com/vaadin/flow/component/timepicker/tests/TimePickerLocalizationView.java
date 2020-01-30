@@ -68,9 +68,6 @@ public class TimePickerLocalizationView extends Div
         valueLabel.setId("value-label");
 
         localesSelect.addValueChangeListener(event -> {
-            Logger logger = Logger.getLogger(getClass().getName());
-            logger.info("localesSelect valueChangeListener, value: "
-                    + Objects.toString(event.getValue(), ""));
             if (event.getValue() == null || event.getValue().isEmpty()) {
                 return;
             }
