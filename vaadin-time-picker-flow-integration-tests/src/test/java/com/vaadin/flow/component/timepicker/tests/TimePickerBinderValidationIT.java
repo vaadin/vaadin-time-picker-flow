@@ -20,7 +20,6 @@ import com.vaadin.flow.testutil.AbstractComponentIT;
 import com.vaadin.flow.testutil.TestPath;
 import org.junit.Assert;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import java.util.Collections;
@@ -29,7 +28,6 @@ import java.util.Collections;
  * Integration tests for the {@link BinderValidationPage}.
  */
 @TestPath("binder-validation")
-@Ignore
 public class TimePickerBinderValidationIT extends AbstractComponentIT {
 
     @Before

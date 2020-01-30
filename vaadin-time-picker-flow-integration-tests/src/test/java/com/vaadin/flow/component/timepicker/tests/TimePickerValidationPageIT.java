@@ -20,7 +20,6 @@ import com.vaadin.flow.component.timepicker.testbench.TimePickerElement;
 import com.vaadin.flow.testutil.AbstractValidationTest;
 import com.vaadin.flow.testutil.TestPath;
 import org.junit.Assert;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.openqa.selenium.WebElement;
 
@@ -28,7 +27,6 @@ import org.openqa.selenium.WebElement;
  * Integration tests for {@link TimePicker} validation.
  */
 @TestPath("time-picker-validation")
-@Ignore
 public class TimePickerValidationPageIT extends AbstractValidationTest {
 
     @Test
