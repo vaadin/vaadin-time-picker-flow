@@ -30,10 +30,7 @@ import java.time.LocalTime;
 import java.time.temporal.ChronoField;
 import java.util.Arrays;
 import java.util.Locale;
-import java.util.Objects;
-import java.util.logging.Logger;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 @Route("time-picker-localization")
 public class TimePickerLocalizationView extends Div
@@ -53,7 +50,7 @@ public class TimePickerLocalizationView extends Div
         timePicker = new TimePicker();
 
         NativeSelect stepSelector = new NativeSelect();
-        localesSelect.setWidth("70px");
+        stepSelector.setWidth("70px");
         stepSelector.setOptions(Arrays.asList("0.001s", "0.5s", "1s", "10s",
                 "1m", "15m", "30m", "1h"));
         stepSelector.setId("step-picker");
