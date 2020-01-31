@@ -16,6 +16,7 @@
 package com.vaadin.flow.component.timepicker.tests;
 
 import java.time.Duration;
+import java.time.LocalTime;
 import java.util.Arrays;
 
 import com.vaadin.flow.component.html.Div;
@@ -26,12 +27,41 @@ import com.vaadin.flow.router.Route;
 public class TimePickerPage extends Div {
 
     public TimePickerPage() {
+        createDefaultTimePicker();
+        createDisabledTimePicker();
         createTimePickerWithStepSetting();
+        createTimePickerWithMinAndMaxSetting();
+    }
+
+    private void createDefaultTimePicker() {
+        Div message = createMessageDiv("simple-picker-message");
+        TimePicker timePicker = new TimePicker();
+        timePicker.setId("simple-picker");
+        timePicker.setLabel("Default TimePicker");
+
+        timePicker.addValueChangeListener(
+                event -> updateMessage(message, timePicker));
+
+        add(timePicker, message);
+    }
+
+    private void createDisabledTimePicker() {
+        Div message = createMessageDiv("disabled-picker-message");
+        TimePicker timePicker = new TimePicker();
+        timePicker.setEnabled(false);
+        timePicker.setLabel("Disabled TimePicker");
+
+        timePicker.addValueChangeListener(event -> message
+                .setText("This event should not have happened"));
+
+        timePicker.setId("disabled-picker");
+        add(timePicker, message);
     }
 
     private void createTimePickerWithStepSetting() {
         TimePicker timePicker = new TimePicker();
         timePicker.setId("step-setting-picker");
+        timePicker.setLabel("TimePicker with step");
 
         NativeSelect stepSelector = new NativeSelect();
         stepSelector.setWidth("70px");
@@ -48,6 +78,38 @@ public class TimePickerPage extends Div {
         });
 
         add(stepSelector, timePicker);
+    }
+
+    private void createTimePickerWithMinAndMaxSetting() {
+        Div message = createMessageDiv("time-picker-min-max-message");
+        TimePicker timePicker = new TimePicker();
+        timePicker.setLabel("TimePicker Min & Max");
+
+        timePicker.setMin("05:00");
+        timePicker.setMax("18:00");
+
+        timePicker.addValueChangeListener(
+                event -> updateMessage(message, timePicker));
+
+        timePicker.setId("time-picker-min-max");
+        add(timePicker, message);
+    }
+
+    private Div createMessageDiv(String id) {
+        Div message = new Div();
+        message.setId(id);
+        message.getStyle().set("whiteSpace", "pre");
+        return message;
+    }
+
+    private void updateMessage(Div message, TimePicker timePicker) {
+        LocalTime selectedTime = timePicker.getValue();
+        if (selectedTime != null) {
+            message.setText("Hour: " + selectedTime.getHour() + "\nMinute: "
+                    + selectedTime.getMinute());
+        } else {
+            message.setText("No time is selected");
+        }
     }
 
 }
