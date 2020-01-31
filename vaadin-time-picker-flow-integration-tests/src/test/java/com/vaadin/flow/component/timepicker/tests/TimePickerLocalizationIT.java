@@ -422,13 +422,13 @@ public class TimePickerLocalizationIT extends AbstractComponentIT {
     private void selectLocale(Locale locale) {
         NativeSelectElement select = $(NativeSelectElement.class)
                 .id("locale-picker");
-        select.setValue(locale.toLanguageTag(), true);
+        select.setValue(locale.toLanguageTag());
     }
 
     private void selectStep(String step) {
         NativeSelectElement select = $(NativeSelectElement.class)
                 .id("step-picker");
-        select.setValue(step, true);
+        select.setValue(step);
     }
 
     private String getLabelValue() {
