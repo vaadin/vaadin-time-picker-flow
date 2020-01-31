@@ -27,7 +27,7 @@ import com.vaadin.flow.testutil.TestPath;
  * Integration tests for the {@link TimePickerPage}.
  */
 @TestPath("time-picker-it")
-public class TimePickerITNew extends AbstractComponentIT {
+public class TimePickerNewIT extends AbstractComponentIT {
 
     @Before
     public void init() {
