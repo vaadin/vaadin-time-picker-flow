@@ -102,7 +102,7 @@ public class TimePickerIT extends AbstractComponentIT {
     private void selectStep(String step) {
         NativeSelectElement select = $(NativeSelectElement.class)
                 .id("step-picker");
-        select.setValue(step, true);
+        select.setValue(step);
     }
 
     private void validatePickerValue(TimePickerElement picker, String value) {
