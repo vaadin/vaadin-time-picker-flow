@@ -25,17 +25,19 @@ import com.vaadin.flow.router.Route;
 @Route("time-picker-it")
 public class TimePickerPage extends Div {
 
-    private final TimePicker timePicker;
-
     public TimePickerPage() {
-        timePicker = new TimePicker();
+        createTimePickerWithStepSetting();
+    }
+
+    private void createTimePickerWithStepSetting() {
+        TimePicker timePicker = new TimePicker();
+        timePicker.setId("step-setting-picker");
 
         NativeSelect stepSelector = new NativeSelect();
         stepSelector.setWidth("70px");
         stepSelector.setOptions(
                 Arrays.asList("0.5s", "10s", "1m", "15m", "30m", "1h"));
         stepSelector.setId("step-picker");
-        // stepSelector.setValue("1h");
 
         stepSelector.addValueChangeListener(event -> {
             if (event.getValue() != null && !event.getValue().isEmpty()) {
