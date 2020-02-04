@@ -29,7 +29,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.By;
 
-import com.vaadin.flow.component.combobox.testbench.ComboBoxElement;
 import com.vaadin.flow.component.timepicker.TimePicker;
 import com.vaadin.flow.component.timepicker.demo.TimePickerView;
 import com.vaadin.flow.component.timepicker.testbench.TimePickerElement;
