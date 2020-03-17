@@ -22,7 +22,6 @@ import java.util.Arrays;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.timepicker.TimePicker;
 import com.vaadin.flow.data.renderer.ComponentRenderer;
-import com.vaadin.flow.data.renderer.Renderer;
 import com.vaadin.flow.router.Route;
 
 @Route("time-picker-it")
@@ -99,14 +98,13 @@ public class TimePickerPage extends Div {
     }
 
     private void createTimePickerFromRenderer() {
-        ComponentRenderer<TimePicker,TimePickerPage> renderer =
-            new ComponentRenderer<TimePicker,TimePickerPage>(
+        ComponentRenderer<TimePicker, TimePickerPage> renderer = new ComponentRenderer<>(
             () -> {
                 TimePicker timePicker = new TimePicker();
                 timePicker.setValue(LocalTime.now());
                 return timePicker;
             });
-        renderer.render(getElement(),null);
+        renderer.render(getElement(), null);
     }
 
     private Div createMessageDiv(String id) {
