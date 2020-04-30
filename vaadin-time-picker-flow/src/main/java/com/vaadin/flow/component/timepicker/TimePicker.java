@@ -58,6 +58,7 @@ public class TimePicker extends GeneratedVaadinTimePicker<TimePicker, LocalTime>
 
     private static final long MILLISECONDS_IN_A_DAY = 86400000L;
     private static final long MILLISECONDS_IN_AN_HOUR = 3600000L;
+    private static final String PROP_AUTO_OPEN_DISABLED = "autoOpenDisabled";
 
     private Locale locale;
     private transient DateTimeFormatter dateTimeFormatter;
@@ -535,6 +536,28 @@ public class TimePicker extends GeneratedVaadinTimePicker<TimePicker, LocalTime>
     private void runBeforeClientResponse(SerializableConsumer<UI> command) {
         getElement().getNode().runWhenAttached(ui -> ui
                 .beforeClientResponse(this, context -> command.accept(ui)));
+    }
+
+    /**
+     * Enables or disables the dropdown opening automatically. If {@code false}
+     * the dropdown is only opened when clicking the toggle button or pressing
+     * Up or Down arrow keys.
+     * 
+     * @param autoOpenEnabled
+     *            {@code false} to prevent the dropdown from opening
+     *            automatically
+     */
+    public void setAutoOpenEnabled(boolean autoOpenEnabled) {
+        getElement().setProperty(PROP_AUTO_OPEN_DISABLED, !autoOpenEnabled);
+    }
+
+    /**
+     * Gets whether dropdown will open automatically or not.
+     *
+     * @return @{code true} if enabled, {@code false} otherwise
+     */
+    public boolean isAutoOpenEnabled() {
+        return !getElement().getProperty(PROP_AUTO_OPEN_DISABLED, false);
     }
 
     /**
