@@ -61,7 +61,7 @@ public class TimePickerIT extends AbstractComponentIT {
 
         picker.setValue("");
         waitUntil(driver -> "No time is selected".equals(message.getText()));
-        Assert.assertFalse(picker.isAutoOpenEnabled());
+        Assert.assertFalse(picker.isAutoOpen());
     }
 
     @Test

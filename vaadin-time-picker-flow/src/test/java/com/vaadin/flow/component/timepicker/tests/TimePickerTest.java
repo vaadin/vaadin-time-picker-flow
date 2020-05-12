@@ -228,10 +228,10 @@ public class TimePickerTest {
     @Test
     public void setAutoOpenDisabled() {
         TimePicker timePicker = new TimePicker();
-        assertTrue(timePicker.isAutoOpenEnabled());
-        timePicker.setAutoOpenEnabled(false);
+        assertTrue(timePicker.isAutoOpen());
+        timePicker.setAutoOpen(false);
         assertTrue(timePicker.getElement().getProperty(PROP_AUTO_OPEN_DISABLED,
                 false));
-        assertFalse(timePicker.isAutoOpenEnabled());
+        assertFalse(timePicker.isAutoOpen());
     }
 }

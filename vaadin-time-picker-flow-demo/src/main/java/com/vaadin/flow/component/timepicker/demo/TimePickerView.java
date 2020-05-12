@@ -193,7 +193,7 @@ public class TimePickerView extends DemoView {
         // source-example-heading: Auto open disabled
         TimePicker timePicker = new TimePicker();
         timePicker.setValue(LocalTime.now());
-        timePicker.setAutoOpenEnabled(false);
+        timePicker.setAutoOpen(false);
         // end-source-example
 
         addCard("Auto open disabled", note, timePicker);

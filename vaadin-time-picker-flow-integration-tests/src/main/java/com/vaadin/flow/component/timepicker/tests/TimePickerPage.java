@@ -51,7 +51,7 @@ public class TimePickerPage extends Div {
         TimePicker timePicker = new TimePicker();
         timePicker.setId("autoopendisabled-picker");
         timePicker.setLabel("Auto open disabled TimePicker");
-        timePicker.setAutoOpenEnabled(false);
+        timePicker.setAutoOpen(false);
 
         timePicker.addValueChangeListener(
                 event -> updateMessage(message, timePicker));
