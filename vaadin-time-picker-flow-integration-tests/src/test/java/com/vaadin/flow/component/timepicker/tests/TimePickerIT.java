@@ -29,12 +29,6 @@ import org.junit.Test;
 @TestPath("time-picker-it")
 public class TimePickerIT extends AbstractComponentIT {
 
-    @Override
-    public void setup() throws Exception {
-        System.setProperty("webdriver.chrome.driver", "C:/Users/Anastasia/Downloads/chromedriver_win32/chromedriver.exe");
-        super.setup();
-    }
-
     @Before
     public void init() {
         open();
