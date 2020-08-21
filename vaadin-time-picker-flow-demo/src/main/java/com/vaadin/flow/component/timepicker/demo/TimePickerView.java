@@ -228,33 +228,36 @@ public class TimePickerView extends DemoView {
         Div div = new Div();
         // begin-source-example
         // source-example-heading: Helper text and helper component
-        TimePicker timePickerHelperText = new TimePicker();
-        timePickerHelperText
+        TimePicker timePicker = new TimePicker();
+        timePicker.setLabel("Start time");
+        timePicker
               .setHelperText("Select the best suited time for a meeting");
 
         TimePicker timePickerHelperComponent = new TimePicker();
+        timePickerHelperComponent.setLabel("Arrival time");
         timePickerHelperComponent.setHelperComponent(
               new Span("Choose the best suited parcel arrive time"));
 
-        add(timePickerHelperText, timePickerHelperComponent);
+        add(timePicker, timePickerHelperComponent);
         // end-source-example
 
-        timePickerHelperText.getStyle().set("margin-right", "15px");
-        div.add(timePickerHelperText, timePickerHelperComponent);
+        timePicker.getStyle().set("margin-right", "15px");
+        div.add(timePicker, timePickerHelperComponent);
         addCard("Helper text and helper component", div);
     }
 
     public void createHelperTextAbove() {
         // begin-source-example
         // source-example-heading: Helper above the field
-        TimePicker timePickerHelperText = new TimePicker();
-        timePickerHelperText
+        TimePicker timePicker = new TimePicker();
+        timePicker.setLabel("Start time");
+        timePicker
               .setHelperText("Select the best suited time for a meeting");
-        timePickerHelperText.getStyle().set("theme", "helper-above-field");
-        add(timePickerHelperText);
+        timePicker.getElement().getThemeList().set("helper-above-field", true);
+        add(timePicker);
 
         // end-source-example
-        addCard("Helper above the field", timePickerHelperText);
+        addCard("Helper above the field", timePicker);
     }
 
 
