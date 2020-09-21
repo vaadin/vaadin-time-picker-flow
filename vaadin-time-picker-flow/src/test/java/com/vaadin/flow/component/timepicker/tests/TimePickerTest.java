@@ -15,15 +15,23 @@
  */
 package com.vaadin.flow.component.timepicker.tests;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+
 import java.time.Duration;
 import java.time.LocalTime;
 
+import org.junit.Assert;
 import org.junit.Test;
+import org.mockito.Mockito;
 
+import com.vaadin.flow.component.Component;
+import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.timepicker.TimePicker;
-
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
+import com.vaadin.flow.di.Instantiator;
+import com.vaadin.flow.dom.Element;
+import com.vaadin.flow.server.VaadinService;
+import com.vaadin.flow.server.VaadinSession;
 
 public class TimePickerTest {
 
@@ -43,9 +51,9 @@ public class TimePickerTest {
 
     @Test
     public void timePicker_nullValue() {
-    	TimePicker timePicker = new TimePicker();
-    	timePicker.setValue(null);
-    	assertEquals(null, timePicker.getValue());
+        TimePicker timePicker = new TimePicker();
+        timePicker.setValue(null);
+        assertEquals(null, timePicker.getValue());
     }
 
     @Test
@@ -216,11 +224,35 @@ public class TimePickerTest {
         assertClearButtonPropertyValueEquals(timePicker, false);
     }
 
-    public void assertClearButtonPropertyValueEquals(TimePicker timePicker, Boolean value) {
+    @Test
+    public void elementHasValue_wrapIntoField_propertyIsNotSetToInitialValue() {
+        Element element = new Element("vaadin-time-picker");
+        element.setProperty("value", "2007-12-03T10:15:30");
+        UI ui = new UI();
+        UI.setCurrent(ui);
+        VaadinSession session = Mockito.mock(VaadinSession.class);
+        ui.getInternals().setSession(session);
+        VaadinService service = Mockito.mock(VaadinService.class);
+        Mockito.when(session.getService()).thenReturn(service);
+
+        Instantiator instantiator = Mockito.mock(Instantiator.class);
+
+        Mockito.when(service.getInstantiator()).thenReturn(instantiator);
+
+        Mockito.when(instantiator.createComponent(TimePicker.class))
+                .thenAnswer(invocation -> new TimePicker(LocalTime.now()));
+
+        TimePicker field = Component.from(element, TimePicker.class);
+        Assert.assertEquals("2007-12-03T10:15:30",
+                field.getElement().getPropertyRaw("value"));
+    }
+
+    public void assertClearButtonPropertyValueEquals(TimePicker timePicker,
+            Boolean value) {
         timePicker.setClearButtonVisible(value);
         assertEquals(value, timePicker.isClearButtonVisible());
-        assertEquals(timePicker.isClearButtonVisible(),
-                timePicker.getElement().getProperty("clearButtonVisible", value));
+        assertEquals(timePicker.isClearButtonVisible(), timePicker.getElement()
+                .getProperty("clearButtonVisible", value));
     }
 
 }
