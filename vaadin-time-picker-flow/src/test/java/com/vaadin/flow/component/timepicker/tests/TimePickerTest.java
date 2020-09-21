@@ -227,7 +227,7 @@ public class TimePickerTest {
     @Test
     public void elementHasValue_wrapIntoField_propertyIsNotSetToInitialValue() {
         Element element = new Element("vaadin-time-picker");
-        element.setProperty("value", "2007-12-03T10:15:30");
+        element.setProperty("value", "15:30");
         UI ui = new UI();
         UI.setCurrent(ui);
         VaadinSession session = Mockito.mock(VaadinSession.class);
@@ -243,7 +243,7 @@ public class TimePickerTest {
                 .thenAnswer(invocation -> new TimePicker(LocalTime.now()));
 
         TimePicker field = Component.from(element, TimePicker.class);
-        Assert.assertEquals("2007-12-03T10:15:30",
+        Assert.assertEquals("15:30",
                 field.getElement().getPropertyRaw("value"));
     }
 
