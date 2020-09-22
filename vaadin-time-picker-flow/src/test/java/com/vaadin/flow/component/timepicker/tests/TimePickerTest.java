@@ -20,6 +20,7 @@ import static org.junit.Assert.assertFalse;
 
 import java.time.Duration;
 import java.time.LocalTime;
+import java.time.temporal.ChronoUnit;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -27,6 +28,7 @@ import org.mockito.Mockito;
 
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.UI;
+import com.vaadin.flow.component.timepicker.GeneratedVaadinTimePicker;
 import com.vaadin.flow.component.timepicker.TimePicker;
 import com.vaadin.flow.di.Instantiator;
 import com.vaadin.flow.dom.Element;
@@ -34,6 +36,17 @@ import com.vaadin.flow.server.VaadinService;
 import com.vaadin.flow.server.VaadinSession;
 
 public class TimePickerTest {
+
+    private static LocalTime TEST_VALUE = LocalTime.now();
+
+    private static class TestTimePicker
+            extends GeneratedVaadinTimePicker<TestTimePicker, LocalTime> {
+
+        TestTimePicker() {
+            super(TEST_VALUE, null, String.class, value -> null, value -> null,
+                    true);
+        }
+    }
 
     @Test
     public void timePicker_basicCases() {
@@ -227,7 +240,9 @@ public class TimePickerTest {
     @Test
     public void elementHasValue_wrapIntoField_propertyIsNotSetToInitialValue() {
         Element element = new Element("vaadin-time-picker");
-        element.setProperty("value", "15:30");
+
+        String value = TEST_VALUE.plus(31l, ChronoUnit.MINUTES).toString();
+        element.setProperty("value", value);
         UI ui = new UI();
         UI.setCurrent(ui);
         VaadinSession session = Mockito.mock(VaadinSession.class);
@@ -239,12 +254,11 @@ public class TimePickerTest {
 
         Mockito.when(service.getInstantiator()).thenReturn(instantiator);
 
-        Mockito.when(instantiator.createComponent(TimePicker.class))
-                .thenAnswer(invocation -> new TimePicker(LocalTime.now()));
+        Mockito.when(instantiator.createComponent(TestTimePicker.class))
+                .thenAnswer(invocation -> new TestTimePicker());
 
-        TimePicker field = Component.from(element, TimePicker.class);
-        Assert.assertEquals("15:30",
-                field.getElement().getPropertyRaw("value"));
+        TestTimePicker field = Component.from(element, TestTimePicker.class);
+        Assert.assertEquals(value, field.getElement().getPropertyRaw("value"));
     }
 
     public void assertClearButtonPropertyValueEquals(TimePicker timePicker,

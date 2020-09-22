@@ -839,6 +839,49 @@ public abstract class GeneratedVaadinTimePicker<R extends GeneratedVaadinTimePic
     /**
      * Constructs a new GeneratedVaadinTimePicker component with the given
      * arguments.
+     * <p>
+     * If {@code isInitialValueOptional} is {@code true} then the initial value
+     * is used only if element has no {@code "value"} property value, otherwise
+     * element {@code "value"} property is ignored and the initial value is set.
+     *
+     * @param initialValue
+     *            the initial value to set to the value
+     * @param defaultValue
+     *            the default value to use if the value isn't defined
+     * @param elementPropertyType
+     *            the type of the element property
+     * @param presentationToModel
+     *            a function that converts a string value to a model value
+     * @param modelToPresentation
+     *            a function that converts a model value to a string value
+     * @param isInitialValueOptional
+     *            if {@code isInitialValueOptional} is {@code true} then the
+     *            initial value is used only if element has no {@code "value"}
+     *            property value, otherwise element {@code "value"} property is
+     *            ignored and the initial value is set
+     * @param <P>
+     *            the property type
+     */
+    public <P> GeneratedVaadinTimePicker(T initialValue, T defaultValue,
+            Class<P> elementPropertyType,
+            SerializableFunction<P, T> presentationToModel,
+            SerializableFunction<T, P> modelToPresentation,
+            boolean isInitialValueOptional) {
+        super("value", defaultValue, elementPropertyType, presentationToModel,
+                modelToPresentation);
+        if ((getElement().getProperty("value") == null
+                || !isInitialValueOptional) && initialValue != null) {
+            setPresentationValue(initialValue);
+        }
+    }
+
+    /**
+     * Constructs a new GeneratedVaadinTimePicker component with the given
+     * arguments.
+     * <p>
+     * If {@code isInitialValueOptional} is {@code true} then the initial value
+     * is used only if element has no {@code "value"} property value, otherwise
+     * element {@code "value"} property is ignored and the initial value is set.
      *
      * @param initialValue
      *            the initial value to set to the value
@@ -857,11 +900,8 @@ public abstract class GeneratedVaadinTimePicker<R extends GeneratedVaadinTimePic
             Class<P> elementPropertyType,
             SerializableFunction<P, T> presentationToModel,
             SerializableFunction<T, P> modelToPresentation) {
-        super("value", defaultValue, elementPropertyType, presentationToModel,
-                modelToPresentation);
-        if (getElement().getProperty("value") == null && initialValue != null) {
-            setPresentationValue(initialValue);
-        }
+        this(initialValue, defaultValue, elementPropertyType,
+                presentationToModel, modelToPresentation, false);
     }
 
     /**
@@ -878,7 +918,7 @@ public abstract class GeneratedVaadinTimePicker<R extends GeneratedVaadinTimePic
     public GeneratedVaadinTimePicker(T initialValue, T defaultValue,
             boolean acceptNullValues) {
         super("value", defaultValue, acceptNullValues);
-        if (getElement().getProperty("value") == null && initialValue != null) {
+        if (initialValue != null) {
             setPresentationValue(initialValue);
         }
     }
@@ -908,7 +948,7 @@ public abstract class GeneratedVaadinTimePicker<R extends GeneratedVaadinTimePic
             SerializableBiFunction<R, T, P> modelToPresentation) {
         super("value", defaultValue, elementPropertyType, presentationToModel,
                 modelToPresentation);
-        if (getElement().getProperty("value") == null && initialValue != null) {
+        if (initialValue != null) {
             setPresentationValue(initialValue);
         }
     }
@@ -918,6 +958,6 @@ public abstract class GeneratedVaadinTimePicker<R extends GeneratedVaadinTimePic
      */
     public GeneratedVaadinTimePicker() {
         this(null, null, null, (SerializableFunction) null,
-                (SerializableFunction) null);
+                (SerializableFunction) null, true);
     }
 }
