@@ -839,10 +839,6 @@ public abstract class GeneratedVaadinTimePicker<R extends GeneratedVaadinTimePic
     /**
      * Constructs a new GeneratedVaadinTimePicker component with the given
      * arguments.
-     * <p>
-     * If {@code isInitialValueOptional} is {@code true} then the initial value
-     * is used only if element has no {@code "value"} property value, otherwise
-     * element {@code "value"} property is ignored and the initial value is set.
      *
      * @param initialValue
      *            the initial value to set to the value
@@ -878,10 +874,6 @@ public abstract class GeneratedVaadinTimePicker<R extends GeneratedVaadinTimePic
     /**
      * Constructs a new GeneratedVaadinTimePicker component with the given
      * arguments.
-     * <p>
-     * If {@code isInitialValueOptional} is {@code true} then the initial value
-     * is used only if element has no {@code "value"} property value, otherwise
-     * element {@code "value"} property is ignored and the initial value is set.
      *
      * @param initialValue
      *            the initial value to set to the value

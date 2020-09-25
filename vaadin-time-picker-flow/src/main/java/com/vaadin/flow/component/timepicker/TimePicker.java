@@ -83,10 +83,6 @@ public class TimePicker extends GeneratedVaadinTimePicker<TimePicker, LocalTime>
 
     /**
      * Convenience constructor to create a time picker with a pre-selected time.
-     * <p>
-     * If {@code isInitialValueOptional} is {@code true} then the initial value
-     * is used only if element has no {@code "value"} property value, otherwise
-     * element {@code "value"} property is ignored and the initial value is set
      *
      * @param time
      *            the pre-selected time in the picker
