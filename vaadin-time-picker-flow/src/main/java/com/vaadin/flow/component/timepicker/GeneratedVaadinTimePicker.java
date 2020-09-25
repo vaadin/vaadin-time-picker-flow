@@ -954,6 +954,6 @@ public abstract class GeneratedVaadinTimePicker<R extends GeneratedVaadinTimePic
      */
     public GeneratedVaadinTimePicker() {
         this(null, null, null, (SerializableFunction) null,
-                (SerializableFunction) null, true);
+                (SerializableFunction) null, false);
     }
 }
